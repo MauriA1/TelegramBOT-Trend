@@ -407,6 +407,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('disable', deshabilitar_cuentas_comando))
     dp.add_handler(CommandHandler('enable', habilitar_cuentas_comando))
     dp.add_handler(CommandHandler('logout', desloguear_cuentas_comando))
+    dp.add_handler(CommandHandler('resetpassword', resetear_password_comando))
     dp.add_handler(CommandHandler("sha256", cargar_sha256))
     dp.add_handler(CommandHandler("sha1", cargar_sha1))
     dp.add_handler(CommandHandler("ip", cargar_ip))
@@ -419,7 +420,6 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('eliminarurl', eliminar_objeto_sospechoso_url))
     dp.add_handler(CommandHandler('eliminardomain', eliminar_objeto_sospechoso_domain))
     dp.add_handler(CommandHandler('eliminarsender', eliminar_objeto_sospechoso_sender))
-    dp.add_handler(CommandHandler('resetpassword', resetear_password_comando))
     dp.add_handler(ConversationHandler(
         entry_points=[
             CommandHandler('ioc', ioc),
