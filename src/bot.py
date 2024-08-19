@@ -1,6 +1,6 @@
 from telegram.ext import Updater, CommandHandler, ConversationHandler, MessageHandler, Filters, CallbackContext
 from telegram import Update
-from engine import get_chiste, get_ips, get_hashes, get_endpoints, isolate_endpoints, procesar_sender, procesar_domain, procesar_url, procesar_ip, procesar_sha1, procesar_sha256
+from engine import *
 import logging, os
 
 # Variables para los estados en la conversación
@@ -102,6 +102,86 @@ def cargar_sender(update: Update, context: CallbackContext) -> None:
     # Envía el resultado al chat
     update.message.reply_text(f'Resultado de la carga de remitentes: {response}')
 
+# Funciones para eliminar indicadores de compromiso cargados
+
+def eliminar_objeto_sospechoso_sha256(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /eliminarsha256
+    objetos = update.message.text[len('/eliminarsha256 '):]
+    
+    # Divide los hashes SHA256 sospechosos por coma y limpia espacios
+    lista_sha256 = [sha256.strip() for sha256 in objetos.split(',')]
+    
+    # Llama a la función que maneja la eliminación de los hashes SHA256 sospechosos
+    response = eliminar_suspicious_objects_sha256(lista_sha256)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado de la eliminación de hashes SHA256 sospechosos: {json.dumps(response, indent=4)}')
+
+def eliminar_objeto_sospechoso_sha1(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /eliminarsha1
+    objetos = update.message.text[len('/eliminarsha1 '):]
+    
+    # Divide los hashes SHA1 sospechosos por coma y limpia espacios
+    lista_sha1 = [sha1.strip() for sha1 in objetos.split(',')]
+    
+    # Llama a la función que maneja la eliminación de los hashes SHA1 sospechosos
+    response = eliminar_suspicious_objects_sha1(lista_sha1)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado de la eliminación de hashes SHA1 sospechosos: {json.dumps(response, indent=4)}')
+
+def eliminar_objeto_sospechoso_ip(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /eliminarip
+    objetos = update.message.text[len('/eliminarip '):]
+    
+    # Divide las IPs sospechosas por coma y limpia espacios
+    lista_ips = [ip.strip() for ip in objetos.split(',')]
+    
+    # Llama a la función que maneja la eliminación de las IPs sospechosas
+    response = eliminar_suspicious_objects_ip(lista_ips)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado de la eliminación de IPs sospechosas: {json.dumps(response, indent=4)}')
+
+def eliminar_objeto_sospechoso_url(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /eliminarurl
+    objetos = update.message.text[len('/eliminarurl '):]
+    
+    # Divide las URLs sospechosas por coma y limpia espacios
+    lista_urls = [url.strip() for url in objetos.split(',')]
+    
+    # Llama a la función que maneja la eliminación de las URLs sospechosas
+    response = eliminar_suspicious_objects_url(lista_urls)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado de la eliminación de URLs sospechosas: {json.dumps(response, indent=4)}')
+
+def eliminar_objeto_sospechoso_domain(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /eliminardomain
+    objetos = update.message.text[len('/eliminardomain '):]
+    
+    # Divide los dominios sospechosos por coma y limpia espacios
+    lista_dominios = [dominio.strip() for dominio in objetos.split(',')]
+    
+    # Llama a la función que maneja la eliminación de los dominios sospechosos
+    response = eliminar_suspicious_objects_domain(lista_dominios)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado de la eliminación de dominios sospechosos: {json.dumps(response, indent=4)}')
+
+def eliminar_objeto_sospechoso_sender(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /eliminar
+    objetos = update.message.text[len('/eliminarsender '):]
+    
+    # Divide los objetos sospechosos por coma y limpia espacios
+    lista_objetos = [objeto.strip() for objeto in objetos.split(',')]
+    
+    # Llama a la función que maneja la eliminación de los objetos sospechosos
+    response = eliminar_suspicious_objects_sender(lista_objetos)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado de la eliminación de senders sospechosos: {json.dumps(response, indent=4)}')
+
 # Funcion para Aislar Equipos separado por coma
 
 def aislar(update: Update, context: CallbackContext) -> None:
@@ -116,6 +196,149 @@ def aislar(update: Update, context: CallbackContext) -> None:
     
     # Envía el resultado al chat
     update.message.reply_text(f'Resultado del aislamiento: {resultado}')
+
+def restaurar(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /aislar
+    equipos = update.message.text[len('/restaurar '):]
+    
+    # Divide los nombres de equipos por coma y limpia espacios
+    lista_equipos = [equipo.strip() for equipo in equipos.split(',')]
+    
+    # Llama a la función para aislar los equipos
+    resultado = restore_endpoints(lista_equipos)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado del restore: {resultado}')
+
+def escanear_malware(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /escanear
+    equipos = update.message.text[len('/escanear '):]
+    
+    # Divide los nombres de equipos por coma y limpia espacios
+    lista_equipos = [equipo.strip() for equipo in equipos.split(',')]
+    
+    # Llama a la función para iniciar el escaneo de malware
+    resultado = start_malware_scan(lista_equipos)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado del escaneo: {json.dumps(resultado, indent=4)}')
+
+# Funcion para listar script personalizados cargados en Vision One
+
+def listar_script(update: Update, context: CallbackContext) -> None:
+    # Llama a la función que maneja la lista de scripts personalizados
+    response = listar_scripts_personalizados()
+    
+    # Si la respuesta es JSON, formatear adecuadamente
+    if isinstance(response, dict):
+        response_text = json.dumps(response, indent=4)
+    else:
+        response_text = response
+
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado de la lista de scripts personalizados: {response_text}')
+
+# Funcion para ejecutar una script personalizada sobre una lista de equipos
+def ejecutar_script(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /script
+    mensaje = update.message.text[len('/script '):].strip()
+
+    try:
+        # Verifica si el mensaje contiene "/target" y opcionalmente "/parametro"
+        if '/target' not in mensaje:
+            update.message.reply_text("Formato incorrecto. Usa: /script nombre_script /parametro parametro1,parametro2 /target equipo1,equipo2, equipo3")
+            return
+        
+        # Extraer la parte del script y los targets (endpoints)
+        script_part, targets_part = mensaje.split('/target')
+
+        # Limpiar y extraer el nombre del script
+        nombre_script = script_part.split('/parametro')[0].strip() if '/parametro' in script_part else script_part.strip()
+
+        # Verificar si hay parámetros opcionales
+        parametros = []
+        if '/parametro' in script_part:
+            parametros = script_part.split('/parametro')[1].strip().split()
+
+        # Separar los targets por comas y limpiar espacios
+        lista_endpoints = [target.strip() for target in targets_part.split(',') if target.strip()]
+
+        # Verifica que tanto el nombre del script como la lista de endpoints no estén vacíos
+        if not nombre_script or not lista_endpoints:
+            update.message.reply_text("Formato incorrecto. Usa: /script nombre_script /parametro parametro1,parametro2 /target equipo1,equipo2, equipo3")
+            return
+
+        # Llama a la función que ejecuta la script personalizada en los endpoints
+        response = ejecutar_script_customizado(nombre_script, lista_endpoints, parametros)
+
+        # Envía el resultado al chat
+        update.message.reply_text(f'Resultado de la ejecución del script {nombre_script}: {json.dumps(response, indent=4)}')
+
+    except Exception as e:
+        # Captura cualquier otra excepción inesperada
+        update.message.reply_text(f"Se produjo un error: {str(e)}")
+
+#ejemplo: /script nombre_script /target endpoint1, endpoint2, endpoint3
+
+#Funciones relacionadas a cuentas de usuarios
+
+    #Función para deshabilitar cuentas
+
+def deshabilitar_cuentas_comando(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /disable
+    cuentas = update.message.text[len('/disable '):]
+    
+    # Divide las cuentas por comas y limpia espacios
+    lista_cuentas = [cuenta.strip() for cuenta in cuentas.split(',')]
+    
+    # Llama a la función que maneja la deshabilitación de cuentas
+    response = deshabilitar_cuentas(lista_cuentas)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado de la deshabilitación de cuentas: {json.dumps(response, indent=4)}')
+
+    #Funcion para habilitar cuentas
+def habilitar_cuentas_comando(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /enable
+    cuentas = update.message.text[len('/enable '):]
+    
+    # Divide las cuentas por comas y limpia espacios
+    lista_cuentas = [cuenta.strip() for cuenta in cuentas.split(',')]
+    
+    # Llama a la función que maneja la habilitación de cuentas
+    response = habilitar_cuentas(lista_cuentas)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado de la habilitación de cuentas: {json.dumps(response, indent=4)}')
+
+    #Funcion para desloguear cuentas
+def desloguear_cuentas_comando(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /logout
+    cuentas = update.message.text[len('/logout '):]
+    
+    # Divide las cuentas por comas y limpia espacios
+    lista_cuentas = [cuenta.strip() for cuenta in cuentas.split(',')]
+    
+    # Llama a la función que maneja el deslogueo de cuentas
+    response = desloguear_cuentas(lista_cuentas)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado del deslogueo de cuentas: {json.dumps(response, indent=4)}')
+
+    #Función para resetear el password de una cuenta
+
+def resetear_password_comando(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /resetpassword
+    cuentas = update.message.text[len('/resetpassword '):]
+    
+    # Divide las cuentas por comas y limpia espacios
+    lista_cuentas = [cuenta.strip() for cuenta in cuentas.split(',')]
+    
+    # Llama a la función que maneja el reseteo de contraseñas
+    response = resetear_password(lista_cuentas)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado del reseteo de contraseñas: {json.dumps(response, indent=4)}')
 
 # Funcion para iniciar el comando /endpoints y pedir nombres de equipos
 def endpoint(update: Update, context: CallbackContext) -> int:
@@ -177,19 +400,40 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('chiste', chiste))
     dp.add_handler(CommandHandler("aislar", aislar))
+    dp.add_handler(CommandHandler('restaurar', restaurar))
+    dp.add_handler(CommandHandler('escanear', escanear_malware))
+    dp.add_handler(CommandHandler('listarscript', listar_script))
+    dp.add_handler(CommandHandler('script', ejecutar_script))
+    dp.add_handler(CommandHandler('disable', deshabilitar_cuentas_comando))
+    dp.add_handler(CommandHandler('enable', habilitar_cuentas_comando))
+    dp.add_handler(CommandHandler('logout', desloguear_cuentas_comando))
     dp.add_handler(CommandHandler("sha256", cargar_sha256))
     dp.add_handler(CommandHandler("sha1", cargar_sha1))
     dp.add_handler(CommandHandler("ip", cargar_ip))
     dp.add_handler(CommandHandler("url", cargar_url))
     dp.add_handler(CommandHandler("domain", cargar_domain))
     dp.add_handler(CommandHandler("sender", cargar_sender))
+    dp.add_handler(CommandHandler('eliminarsha256', eliminar_objeto_sospechoso_sha256))
+    dp.add_handler(CommandHandler('eliminarsha1', eliminar_objeto_sospechoso_sha1))
+    dp.add_handler(CommandHandler('eliminarip', eliminar_objeto_sospechoso_ip))
+    dp.add_handler(CommandHandler('eliminarurl', eliminar_objeto_sospechoso_url))
+    dp.add_handler(CommandHandler('eliminardomain', eliminar_objeto_sospechoso_domain))
+    dp.add_handler(CommandHandler('eliminarsender', eliminar_objeto_sospechoso_sender))
+    dp.add_handler(CommandHandler('resetpassword', resetear_password_comando))
     dp.add_handler(ConversationHandler(
         entry_points=[
             CommandHandler('ioc', ioc),
-            CommandHandler('endpoint', endpoint)
         ],
         states={
             INPUT_TEXT: [MessageHandler(Filters.text & ~Filters.command, update_ioc)],
+        },
+        fallbacks=[CommandHandler('cancel', cancel)]
+    ))
+    dp.add_handler(ConversationHandler(
+        entry_points=[
+            CommandHandler('endpoint', endpoint)
+        ],
+        states={
             TEXTO_ENDPOINTS: [MessageHandler(Filters.text & ~Filters.command, isolate_endpoints_handler)]
         },
         fallbacks=[CommandHandler('cancel', cancel)]
