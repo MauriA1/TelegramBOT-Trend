@@ -385,7 +385,8 @@ def buscar_mail(update: Update, context: CallbackContext) -> None:
     # Obtén el texto después del comando /buscarmail
     asunto = update.message.text[len('/buscarmail '):].strip()
 
-    # Pasa el asunto a la función con comillas dobles
+    # Pasa el asunto a la función con comillas dobles estándar
+    asunto = asunto.replace('“', '"').replace('”', '"')
     response = buscar_correos_por_asunto(f'"{asunto}"')
     
     if response.get('error'):
@@ -399,6 +400,7 @@ def buscar_mail(update: Update, context: CallbackContext) -> None:
     # Prepara el mensaje de respuesta
     uuids_text = ','.join(uuids)
     update.message.reply_text(f"Se detectaron {num_mensajes} mensajes con el asunto '{asunto}'. UUIDs: {uuids_text}")
+
 
 
 # Funcion para iniciar el comando /endpoints y pedir nombres de equipos
