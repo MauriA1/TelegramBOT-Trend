@@ -628,9 +628,9 @@ def restaurar_mensajes(uuids: list) -> str:
         
 def buscar_correos_por_asunto(asunto: str) -> dict:
     headersCorreo = {
-        'Authorization': 'Bearer YOUR_TOKEN',  # Asegúrate de reemplazar 'YOUR_TOKEN' por el token correcto
+        'Authorization': 'Bearer ' + token, # Asegúrate de reemplazar 'YOUR_TOKEN' por el token correcto
         'Content-Type': 'application/json;charset=utf-8',
-        'TMV1-Query': f'subject:{asunto}'  # Asunto ya viene con comillas
+        'TMV1-Query': f'mailMsgSubject:{asunto}'  # Asunto ya viene con comillas
     }
     try:
         # Realiza la solicitud GET a la API
