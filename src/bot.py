@@ -340,6 +340,67 @@ def resetear_password_comando(update: Update, context: CallbackContext) -> None:
     # Envía el resultado al chat
     update.message.reply_text(f'Resultado del reseteo de contraseñas: {json.dumps(response, indent=4)}')
 
+#Funciones relacionadas a emails
+
+def borrar_mensaje(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /borrarmail
+    uuids = update.message.text[len('/borrarmail '):]
+    
+    # Divide los UUIDs por coma y limpia espacios
+    lista_uuids = [uuid.strip() for uuid in uuids.split(',')]
+    
+    # Llama a la función que maneja el borrado de los mensajes
+    response = eliminar_mensajes_por_uuid(lista_uuids)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado del borrado de mensajes: {response}')
+
+def enviar_a_cuarentena(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /cuarentena
+    uuids = update.message.text[len('/cuarentena '):]
+    
+    # Divide los UUIDs por coma y limpia espacios
+    lista_uuids = [uuid.strip() for uuid in uuids.split(',')]
+    
+    # Llama a la función que maneja el envío a cuarentena
+    response = mandar_mensajes_a_cuarentena(lista_uuids)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado del envío a cuarentena: {response}')
+
+def restaurar_email(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /restauraremail
+    uuids = update.message.text[len('/restauraremail '):]
+    
+    # Divide los UUIDs por coma y limpia espacios
+    lista_uuids = [uuid.strip() for uuid in uuids.split(',')]
+    
+    # Llama a la función que maneja la restauración de los mensajes
+    response = restaurar_mensajes(lista_uuids)
+    
+    # Envía el resultado al chat
+    update.message.reply_text(f'Resultado de la restauración de mensajes: {response}')
+
+def buscar_mail(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /buscarmail
+    asunto = update.message.text[len('/buscarmail '):].strip()
+
+    # Pasa el asunto a la función con comillas dobles
+    response = buscar_correos_por_asunto(f'"{asunto}"')
+    
+    if response.get('error'):
+        update.message.reply_text(f"Error: {response['error']}")
+        return
+    
+    # Obtén el número de mensajes y los UUIDs
+    num_mensajes = len(response.get('items', []))
+    uuids = [item['uniqueId'] for item in response.get('items', [])]
+    
+    # Prepara el mensaje de respuesta
+    uuids_text = ','.join(uuids)
+    update.message.reply_text(f"Se detectaron {num_mensajes} mensajes con el asunto '{asunto}'. UUIDs: {uuids_text}")
+
+
 # Funcion para iniciar el comando /endpoints y pedir nombres de equipos
 def endpoint(update: Update, context: CallbackContext) -> int:
     logger.info('Dialogo ENDPOINT')
