@@ -15,6 +15,10 @@ url_path_disable_account = '/v3.0/response/domainAccounts/disable'
 url_path_enable_account = '/v3.0/response/domainAccounts/enable'
 url_path_logout_account = '/v3.0/response/domainAccounts/signOut'
 url_path_reset_account_password = '/v3.0/response/domainAccounts/resetPassword'
+url_path_delete_email = '/v3.0/response/emails/delete'
+url_path_quarantine_email = '/v3.0/response/emails/quarantine'
+url_path_restore_email = '/v3.0/response/emails/restore'
+url_path_email_activities = '/v3.0/search/emailActivities'
 token = 'tu_token_aqui'  # Sustituye con tu token real
 
 headers = {
@@ -558,3 +562,83 @@ def resetear_password(lista_cuentas):
             return f'Error: {r.status_code} - {r.text}'
     except requests.exceptions.RequestException as e:
         return f'Error al hacer la solicitud: {e}'
+
+#Funciones referentes a correo
+
+
+def eliminar_mensajes_por_uuid(uuids: list) -> str:
+    # Construir el cuerpo de la solicitud
+    body = [
+        {
+            'description': f'Eliminando mensaje {i+1}',
+            'uniqueId': uuid_value
+        }
+        for i, uuid_value in enumerate(uuids)
+    ]
+    
+    # Envía la solicitud POST a la API
+    try:
+        r = requests.post(url_base + url_path_delete_email, headers=headers, json=body)
+        if r.status_code == 200:
+            return "Mensajes eliminados correctamente."
+        else:
+            return f"Error al eliminar mensajes. Código de estado: {r.status_code}"
+    except Exception as e:
+        return f"Error al conectar con la API: {e}"
+
+def mandar_mensajes_a_cuarentena(uuids: list) -> str:
+    # Construir el cuerpo de la solicitud
+    body = [
+        {
+            'description': f'Enviando mensaje {i+1} a cuarentena',
+            'uniqueId': uuid_value
+        }
+        for i, uuid_value in enumerate(uuids)
+    ]
+    
+    # Envía la solicitud POST a la API
+    try:
+        r = requests.post(url_base + url_path_quarantine_email, headers=headers, json=body)
+        if r.status_code == 200:
+            return "Mensajes enviados a cuarentena correctamente."
+        else:
+            return f"Error al enviar mensajes a cuarentena. Código de estado: {r.status_code}"
+    except Exception as e:
+        return f"Error al conectar con la API: {e}"
+
+def restaurar_mensajes(uuids: list) -> str:
+    # Construir el cuerpo de la solicitud
+    body = [
+        {
+            'description': f'Restaurando mensaje {i+1}',
+            'uniqueId': uuid_value
+        }
+        for i, uuid_value in enumerate(uuids)
+    ]
+    
+    # Envía la solicitud POST a la API
+    try:
+        r = requests.post(url_base + url_path_restore_email, headers=headers, json=body)
+        if r.status_code == 200:
+            return "Mensajes restaurados correctamente."
+        else:
+            return f"Error al restaurar mensajes. Código de estado: {r.status_code}"
+    except Exception as e:
+
+def buscar_correos_por_asunto(asunto: str) -> dict:
+    headersCorreo = {
+        'Authorization': 'Bearer YOUR_TOKEN',  # Asegúrate de reemplazar 'YOUR_TOKEN' por el token correcto
+        'Content-Type': 'application/json;charset=utf-8',
+        'TMV1-Query': f'subject:{asunto}'  # Asunto ya viene con comillas
+    }
+    try:
+        # Realiza la solicitud GET a la API
+        r = requests.get(url_base + url_path_email_activities, headers=headersCorreo)
+        
+        # Verifica si la solicitud fue exitosa
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return {'error': f"Código de estado: {r.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {'error': str(e)}
