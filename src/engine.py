@@ -624,7 +624,8 @@ def restaurar_mensajes(uuids: list) -> str:
         else:
             return f"Error al restaurar mensajes. Código de estado: {r.status_code}"
     except Exception as e:
-
+        return f"Error al conectar con la API: {e}"
+        
 def buscar_correos_por_asunto(asunto: str) -> dict:
     headersCorreo = {
         'Authorization': 'Bearer YOUR_TOKEN',  # Asegúrate de reemplazar 'YOUR_TOKEN' por el token correcto
