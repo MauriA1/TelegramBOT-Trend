@@ -481,6 +481,10 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('eliminarurl', eliminar_objeto_sospechoso_url))
     dp.add_handler(CommandHandler('eliminardomain', eliminar_objeto_sospechoso_domain))
     dp.add_handler(CommandHandler('eliminarsender', eliminar_objeto_sospechoso_sender))
+    dp.add_handler(CommandHandler('borrarmail', borrar_mensaje))
+    dp.add_handler(CommandHandler('cuarentena', enviar_a_cuarentena))
+    dp.add_handler(CommandHandler('restauraremail', restaurar_email))
+    dp.add_handler(CommandHandler('buscarmail', buscar_mail))
     dp.add_handler(ConversationHandler(
         entry_points=[
             CommandHandler('ioc', ioc),
