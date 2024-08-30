@@ -19,6 +19,8 @@ url_path_delete_email = '/v3.0/response/emails/delete'
 url_path_quarantine_email = '/v3.0/response/emails/quarantine'
 url_path_restore_email = '/v3.0/response/emails/restore'
 url_path_email_activities = '/v3.0/search/emailActivities'
+url_path_workbenc_alerts = '/v3.0/workbench/alerts'
+url_path_task = '/v3.0/response/tasks'
 token = 'tu_token_aqui'  # Sustituye con tu token real
 
 headers = {
@@ -635,6 +637,211 @@ def buscar_correos_por_asunto(asunto: str) -> dict:
     try:
         # Realiza la solicitud GET a la API
         r = requests.get(url_base + url_path_email_activities, headers=headersCorreo)
+        
+        # Verifica si la solicitud fue exitosa
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return {'error': f"Código de estado: {r.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {'error': str(e)}
+
+# Funciones Referentes a Workbench
+
+def obtener_alertas_workbench() -> dict:
+    query_params = {
+        'orderBy': 'createdDateTime desc'  # Ordena por createdDateTime en orden descendente
+    }
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json;charset=utf-8'
+    }
+    try:
+        # Realiza la solicitud GET a la API
+        r = requests.get(url_base + url_path_workbenc_alerts, params=query_params, headers=headers)    
+        # Verifica si la solicitud fue exitosa
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return {'error': f"Código de estado: {r.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {'error': str(e)}
+
+import requests
+
+def obtener_detalle_alerta_workbench(alerta_id: str) -> dict:
+    url_path_workbench_id = f'/v3.0/workbench/alerts/{alerta_id}'
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json;charset=utf-8'
+    }
+    try:
+        # Realiza la solicitud GET a la API
+        r = requests.get(url_base + url_path_workbench_id, headers=headers)
+        
+        # Verifica si la solicitud fue exitosa
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return {'error': f"Código de estado: {r.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {'error': str(e)}
+
+
+def cambiar_estado_alerta_workbench(alerta_id: str, nuevo_estado: str, findings: str = None) -> dict:
+    url_path_workbench_id_status = f'/v3.0/workbench/alerts/{alerta_id}'
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json;charset=utf-8',
+        'If-Match': '*'
+    }
+    # Cuerpo de la solicitud que contiene el nuevo estado y opcionalmente los findings
+    body = {
+        'status': nuevo_estado
+    }
+    if findings:
+        body['investigationResult'] = findings
+    try:
+        # Realiza la solicitud PATCH a la API
+        r = requests.patch(url_base + url_path_workbench_id_status, headers=headers, json=body)
+        # Verifica si la solicitud fue exitosa
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return {'error': f"Código de estado: {r.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {'error': str(e)}
+
+import requests
+
+def obtener_notas_workbench(alerta_id: str) -> dict:
+    url_path_workbench_get_notes = f'/v3.0/workbench/alerts/{alerta_id}/notes'
+    query_params = {
+        'orderBy': 'lastUpdatedDateTime desc,creatorName asc,id asc',  # Ordena por lastUpdatedDateTime, luego por creatorName, luego por id
+        'top': 100  # Obtiene las primeras 100 notas
+    }
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json;charset=utf-8'
+    }
+    try:
+        # Realiza la solicitud GET a la API
+        r = requests.get(url_base + url_path_workbench_get_notes, params=query_params, headers=headers)     
+        # Verifica si la solicitud fue exitosa
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return {'error': f"Código de estado: {r.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {'error': str(e)}
+
+import requests
+
+def borrar_nota_workbench_api(alerta_id: str, nota_id: str) -> dict:
+    url_path_workbench_note_delete = f'/v3.0/workbench/alerts/{alerta_id}/notes/delete'
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json;charset=utf-8'
+    }
+    body = [
+        {
+            'id': int(nota_id)  # Asegúrate de convertir el ID de la nota a entero
+        }
+    ]
+    try:
+        # Realiza la solicitud POST a la API para borrar la nota
+        r = requests.post(url_base + url_path_workbench_note_delete, headers=headers, json=body)   
+        # Verifica si la solicitud fue exitosa
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return {'error': f"Código de estado: {r.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {'error': str(e)}
+
+import requests
+
+def agregar_nota_workbench_api(alerta_id: str, contenido: str) -> dict:
+    url_path_workbench_note_add = f'/v3.0/workbench/alerts/{alerta_id}/notes'
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json;charset=utf-8'
+    }
+    body = {
+        'content': contenido  # El contenido de la nota
+    }
+    try:
+        # Realiza la solicitud POST a la API para agregar la nota
+        r = requests.post(url_base + url_path_workbench_note_add, headers=headers, json=body)
+        
+        # Verifica si la solicitud fue exitosa
+        if r.status_code == 201:  # Código 201 para creación exitosa
+            return r.json()
+        else:
+            return {'error': f"Código de estado: {r.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {'error': str(e)}
+
+def obtener_tareas_top_50() -> dict:
+    query_params = {
+        'top': 50  # Limita los resultados a las primeras 50 tareas
+    }
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json;charset=utf-8'
+    }
+    try:
+        # Realiza la solicitud GET a la API
+        r = requests.get(url_base + url_path_task, params=query_params, headers=headers)
+        
+        # Verifica si la solicitud fue exitosa
+        if r.status_code == 200:
+            return r.json()
+        else:
+            return {'error': f"Código de estado: {r.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {'error': str(e)}
+
+import requests
+
+def buscar_guid_endpoint(endpoint_name: str) -> dict:
+    url_path_endpoint_get = '/v3.0/endpointSecurity/endpoints'
+    query_params = {
+        'orderBy': 'endpointName',
+        'top': 1,  # Solo necesitamos el primer resultado coincidente
+        'select': 'endpointName,agentGuid'
+    }
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json;charset=utf-8',
+        'TMV1-Filter': f'endpointName eq "{endpoint_name}"'
+    }
+    try:
+        # Realiza la solicitud GET a la API para obtener el GUID del endpoint
+        r = requests.get(url_base + url_path_endpoint_get, params=query_params, headers=headers)  
+        # Verifica si la solicitud fue exitosa
+        if r.status_code == 200:
+            results = r.json().get('items', [])
+            if results:
+                return {'agentGuid': results[0]['agentGuid']}
+            else:
+                return {'error': f"No se encontró ningún endpoint con el nombre '{endpoint_name}'"}
+        else:
+            return {'error': f"Código de estado: {r.status_code}"}
+    except requests.exceptions.RequestException as e:
+        return {'error': str(e)}
+
+import requests
+
+def obtener_detalles_endpoint(agent_guid: str) -> dict:
+    url_path_endpoint_details = f'/v3.0/endpointSecurity/endpoints/{agent_guid}'
+    headers = {
+        'Authorization': f'Bearer {token}',
+        'Content-Type': 'application/json;charset=utf-8'
+    }
+    try:
+        # Realiza la solicitud GET a la API para obtener los detalles del endpoint
+        r = requests.get(url_base + url_path, headers=headers)
         
         # Verifica si la solicitud fue exitosa
         if r.status_code == 200:
