@@ -401,6 +401,226 @@ def buscar_mail(update: Update, context: CallbackContext) -> None:
     uuids_text = ','.join(uuids)
     update.message.reply_text(f"Se detectaron {num_mensajes} mensajes con el asunto '{asunto}'. UUIDs: {uuids_text}")
 
+# Funciones referentes a Workbench
+
+def listar_workbench(update: Update, context: CallbackContext) -> None:
+    # Llama a la función que realiza la solicitud para obtener las alertas
+    response = obtener_alertas_workbench()
+    
+    if response.get('error'):
+        update.message.reply_text(f"Error: {response['error']}")
+        return
+    
+    # Obtén la lista de alertas
+    alertas = response.get('items', [])
+    
+    if not alertas:
+        update.message.reply_text("No se encontraron alertas en el Workbench.")
+        return
+    
+    # Prepara la lista de alertas para el mensaje
+    lista_alertas = [f"ID: {alerta['id']}, Nombre: {alerta['name']}, Fecha: {alerta['createdDateTime']}" for alerta in alertas]
+    alertas_text = "\n".join(lista_alertas)
+    
+    # Envía la lista de alertas al chat
+    update.message.reply_text(f"Alertas en Workbench:\n{alertas_text}")
+
+def detalle_workbench(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /detalleworkbench
+    ids = update.message.text[len('/detalleworkbench '):].strip()
+    
+    # Divide los IDs por coma y limpia espacios
+    lista_ids = [id.strip() for id in ids.split(',')]
+    
+    # Para cada ID, obtener los detalles de la alerta
+    detalles_alertas = []
+    for id in lista_ids:
+        response = obtener_detalle_alerta_workbench(id)
+        
+        if response.get('error'):
+            detalles_alertas.append(f"Error con la alerta {id}: {response['error']}")
+        else:
+            # Extraer detalles relevantes de la alerta
+            detalles = f"ID: {response.get('id')}\nNombre: {response.get('name')}\nDescripción: {response.get('description')}\nFecha de creación: {response.get('createdDateTime')}\nScore: {response.get('score')}\n"
+            detalles_alertas.append(detalles)
+    
+    # Unir todos los detalles y enviarlos como un solo mensaje
+    detalles_text = "\n".join(detalles_alertas)
+    update.message.reply_text(f"Detalles de las alertas en Workbench:\n\n{detalles_text}")
+
+#Funcion para cambiar estado de workbench:
+
+def cambiar_estado_workbench(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /workbenchstatus
+    mensaje = update.message.text[len('/workbenchstatus '):].strip()
+    
+    # Separa los IDs, el estado, y opcionalmente los findings
+    try:
+        partes = mensaje.split(' /')
+        ids_part = partes[0]
+        status_part = partes[1]
+        findings_part = partes[2] if len(partes) > 2 else None
+    except ValueError:
+        update.message.reply_text("Formato incorrecto. Usa: /workbenchstatus workbench1,workbench2 /Estado [/findings Resultado]")
+        return
+    
+    # Divide los IDs por coma y limpia espacios
+    lista_ids = [id.strip() for id in ids_part.split(',')]
+    
+    # Llama a la función que maneja el cambio de estado para cada ID
+    resultados = []
+    for alerta_id in lista_ids:
+        response = cambiar_estado_alerta_workbench(alerta_id, status_part, findings_part)
+        
+        if response.get('error'):
+            resultados.append(f"Error con la alerta {alerta_id}: {response['error']}")
+        else:
+            result = f"Alerta {alerta_id}: Estado cambiado a {status_part}"
+            if findings_part:
+                result += f" con findings: {findings_part}"
+            resultados.append(result)
+    
+    # Unir todos los resultados y enviarlos como un solo mensaje
+    resultado_text = "\n".join(resultados)
+    update.message.reply_text(f"Resultados del cambio de estado:\n{resultado_text}")
+
+    #Funciones notas workbench
+
+    def listar_notas_workbench(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /listarworkbenchnotes
+    alerta_id = update.message.text[len('/listarworkbenchnotes '):].strip()
+    
+    # Llama a la función que obtiene las notas de la alerta
+    response = obtener_notas_workbench(alerta_id)
+    
+    if response.get('error'):
+        update.message.reply_text(f"Error: {response['error']}")
+        return
+    
+    # Obtén las notas
+    notas = response.get('items', [])
+    
+    if not notas:
+        update.message.reply_text(f"No se encontraron notas para la alerta {alerta_id}.")
+        return
+    
+    # Prepara la lista de notas para el mensaje
+    lista_notas = [f"ID: {nota['id']}\nCreador: {nota['creatorName']}\nÚltima actualización: {nota['lastUpdatedDateTime']}\nContenido: {nota['noteContent']}" for nota in notas]
+    notas_text = "\n\n".join(lista_notas)
+    
+    # Envía la lista de notas al chat
+    update.message.reply_text(f"Notas de la alerta {alerta_id}:\n\n{notas_text}")
+
+
+def listar_notas_workbench(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /listarworkbenchnotes
+    alerta_id = update.message.text[len('/listarworkbenchnotes '):].strip()
+    
+    # Llama a la función que obtiene las notas de la alerta
+    response = obtener_notas_workbench(alerta_id)
+    
+    if response.get('error'):
+        update.message.reply_text(f"Error: {response['error']}")
+        return
+    
+    # Obtén las notas
+    notas = response.get('items', [])
+    
+    if not notas:
+        update.message.reply_text(f"No se encontraron notas para la alerta {alerta_id}.")
+        return
+    
+    # Prepara la lista de notas para el mensaje
+    lista_notas = [f"ID: {nota['id']}\nCreador: {nota['creatorName']}\nÚltima actualización: {nota['lastUpdatedDateTime']}\nContenido: {nota['noteContent']}" for nota in notas]
+    notas_text = "\n\n".join(lista_notas)
+    
+    # Envía la lista de notas al chat
+    update.message.reply_text(f"Notas de la alerta {alerta_id}:\n\n{notas_text}")
+
+def borrar_nota_workbench(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /borrarnotaworkbench
+    mensaje = update.message.text[len('/borrarnotaworkbench '):].strip()
+    
+    # Separa el ID de la alerta del ID de la nota
+    try:
+        alerta_id, nota_id = mensaje.split(' /nota ')
+    except ValueError:
+        update.message.reply_text("Formato incorrecto. Usa: /borrarnotaworkbench workbench /nota iddenota")
+        return
+    
+    # Llama a la función que borra la nota
+    response = borrar_nota_workbench_api(alerta_id.strip(), nota_id.strip())
+    
+    if response.get('error'):
+        update.message.reply_text(f"Error al borrar la nota: {response['error']}")
+    else:
+        update.message.reply_text(f"Nota con ID {nota_id} de la alerta {alerta_id} borrada correctamente.")
+
+def agregar_nota_workbench(update: Update, context: CallbackContext) -> None:
+    # Obtén el texto después del comando /agregarnotaworkbench
+    mensaje = update.message.text[len('/agregarnotaworkbench '):].strip()
+    
+    # Separa el ID de la alerta del contenido de la nota
+    try:
+        alerta_id, contenido_nota = mensaje.split(' /contenido ', 1)
+    except ValueError:
+        update.message.reply_text("Formato incorrecto. Usa: /agregarnotaworkbench workbench /contenido \"texto\"")
+        return
+    
+    # Llama a la función que agrega la nota
+    response = agregar_nota_workbench_api(alerta_id.strip(), contenido_nota.strip())
+    
+    if response.get('error'):
+        update.message.reply_text(f"Error al agregar la nota: {response['error']}")
+    else:
+        update.message.reply_text(f"Nota agregada a la alerta {alerta_id} correctamente.")
+
+def listar_tareas(update: Update, context: CallbackContext) -> None:
+    # Llama a la función que obtiene las tareas
+    response = obtener_tareas_top_50()
+    
+    if response.get('error'):
+        update.message.reply_text(f"Error: {response['error']}")
+        return
+    
+    # Obtén la lista de tareas
+    tareas = response.get('items', [])
+    
+    if not tareas:
+        update.message.reply_text("No se encontraron tareas.")
+        return
+    
+    # Prepara la lista de tareas para el mensaje
+    lista_tareas = [f"ID: {tarea['id']}\nNombre: {tarea.get('name', 'Sin nombre')}\nEstado: {tarea.get('status', 'Desconocido')}" for tarea in tareas]
+    tareas_text = "\n\n".join(lista_tareas)
+    
+    # Envía la lista de tareas al chat
+    update.message.reply_text(f"Tareas (Top 50):\n\n{tareas_text}")
+
+def detalle_endpoint(update: Update, context: CallbackContext) -> None:
+    # Obtén el nombre del endpoint después del comando /detalleendpoints
+    endpoint_name = update.message.text[len('/detalleendpoints '):].strip()
+    
+    if not endpoint_name:
+        update.message.reply_text("Por favor, proporciona el nombre del endpoint. Ejemplo: /detalleendpoints nombre_endpoint")
+        return
+    
+    # Buscar el agentGuid del endpoint
+    guid = buscar_guid_endpoint(endpoint_name)
+    
+    if guid.get('error'):
+        update.message.reply_text(f"Error al buscar el GUID del endpoint: {guid['error']}")
+        return
+    
+    # Obtener los detalles del endpoint usando el GUID
+    response = obtener_detalles_endpoint(guid['agentGuid'])
+    
+    if response.get('error'):
+        update.message.reply_text(f"Error al obtener los detalles del endpoint: {response['error']}")
+    else:
+        # Extraer detalles relevantes del endpoint y enviar al usuario
+        detalles = f"Nombre: {response.get('endpointName')}\nGUID: {response.get('agentGuid')}\nOS: {response.get('os')}\nÚltimo estado: {response.get('lastStatus')}\n"
+        update.message.reply_text(f"Detalles del endpoint:\n{detalles}")
 
 
 # Funcion para iniciar el comando /endpoints y pedir nombres de equipos
@@ -487,6 +707,14 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler('cuarentena', enviar_a_cuarentena))
     dp.add_handler(CommandHandler('restauraremail', restaurar_email))
     dp.add_handler(CommandHandler('buscarmail', buscar_mail))
+    dp.add_handler(CommandHandler('listarworkbench', listar_workbench))
+    dp.add_handler(CommandHandler('detalleworkbench', detalle_workbench))
+    dp.add_handler(CommandHandler('workbenchstatus', cambiar_estado_workbench))
+    dp.add_handler(CommandHandler('listarworkbenchnotes', listar_notas_workbench))
+    dp.add_handler(CommandHandler('borrarnotaworkbench', borrar_nota_workbench))
+    dp.add_handler(CommandHandler('agregarnotaworkbench', agregar_nota_workbench))
+    dp.add_handler(CommandHandler('listartareas', listar_tareas))
+    dp.add_handler(CommandHandler('detalleendpoints', detalle_endpoint))
     dp.add_handler(ConversationHandler(
         entry_points=[
             CommandHandler('ioc', ioc),
