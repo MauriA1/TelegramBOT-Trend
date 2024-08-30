@@ -623,6 +623,7 @@ def detalle_endpoint(update: Update, context: CallbackContext) -> None:
         update.message.reply_text(f"Detalles del endpoint:\n{detalles}")
 
 
+
 # Funcion para iniciar el comando /endpoints y pedir nombres de equipos
 def endpoint(update: Update, context: CallbackContext) -> int:
     logger.info('Dialogo ENDPOINT')
