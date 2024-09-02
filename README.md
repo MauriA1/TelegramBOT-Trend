@@ -36,7 +36,7 @@ docker run -e TOKEN_TELEGRAM="YOUR_TELEGRAM_TOKEN" bot
 Diálogo entre el BOT y el Administrador, donde se le informa las instrucciones para realizar e impactar en su consola de Vision One. Utilizando el comando /help le proporcionara las posibiles acciones que pueda realizar.
 
 <p align="center">
-<img src="screenshots/TelegramDialogoAdministrador.png" width="400" >
+<img src="screenshots/TelegramDialogoAdministrador.jpg" width="400" >
 </p>
 <p align="center">
 <img src="screenshots/TelegramBot2.jpg" width="800" >
