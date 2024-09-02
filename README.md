@@ -10,7 +10,7 @@ Toma acciones en tu consola de Vision One por mensaje. El Bot se encargará de r
 
 [How To](https://core.telegram.org/bots)
 <p align="center">
-<img src="screenshots/BotTelegram2.png" width="400" >
+<img src="screenshots/BotTelegram.png" width="400" >
 </p>
 
 ### Pasos
@@ -39,7 +39,7 @@ Diálogo entre el BOT y el Administrador, donde se le informa las instrucciones 
 <img src="screenshots/TelegramDialogoAdministrador.jpg" width="400" >
 </p>
 <p align="center">
-<img src="screenshots/TelegramBot2.jpg" width="800" >
+<img src="screenshots/TelegramBot2.png" width="800" >
 </p>
 
 ## Proceso :robot:
