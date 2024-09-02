@@ -42,10 +42,10 @@ Diálogo entre el BOT y el Administrador, donde se le informa las instrucciones 
 <img src="screenshots/TelegramBot.jpg" width="800" >
 </p>
 
-## Working :robot:
+## Proceso :robot:
 
 Dentro de la consola Trend Micro Vision One, debemos generar un API Key la cual va a ser utilizada por el BOT.
-Debemos editar el archivo engine.py, modificando el parametro token y agregaremos la el valor de la API Key que nos otorga la consola de Vision One.
+Debemos editar el archivo engine.py, modificando el parametro token y agregaremos el valor de la API Key que nos otorga la consola de Vision One.
 
 ### Envío IoC al Bot
 
