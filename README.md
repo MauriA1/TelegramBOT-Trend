@@ -18,7 +18,7 @@ Toma acciones en tu consola de Vision One por mensaje. El Bot se encargará de r
 #### Descarga el Proyecto
 
 ```bash
-git clone git@github.com:Gig-Jag/Telegram
+git clone git@github.com:EDSITec/BotTelegram.git
 ```
 
 #### Construir la imagen
