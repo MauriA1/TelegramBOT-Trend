@@ -1,5 +1,5 @@
 <p align="center">
-<img src="screenshots/BannerBTTMV1.png" width="1024" >
+<img src="screenshots/Banneredsi.png" width="1024" >
 </p>
 
 # Telegram Vision One Bot :robot:
