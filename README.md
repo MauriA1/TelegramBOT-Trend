@@ -2,7 +2,7 @@
 <img src="screenshots/BannerEDSI.png" width="1024" >
 </p>
 
-# Telegram BOT & Vision One :robot:
+# BOT Telegram & Vision One :robot:
 
 Toma acciones en tu consola de Vision One por mensaje. El Bot se encargará de realizar el trabajo.
 
