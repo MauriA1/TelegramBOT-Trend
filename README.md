@@ -42,6 +42,12 @@ Diálogo entre el BOT y el Administrador, donde se le informa las instrucciones 
 <img src="screenshots/TelegramBot2.png" width="800" >
 </p>
 
+### Consulta de tareas disponibles
+
+<p align="center">
+<img src="screenshots/help.png" width="400" >
+</p>
+
 ## Prueba
 
 Puedo validar que el bot este funcionando ejecutando el comando /chiste en Telegram
@@ -58,13 +64,6 @@ Debemos editar el archivo engine.py, modificando el parametro token y agregaremo
 
 
 *** IMPORTANTE: ASIGNAR SOLO LOS PERMISOS NECESARIOS A LA API KEY ***
-
-### Consulta de tareas disponibles
-
-<p align="center">
-<img src="screenshots/help.png" width="400" >
-</p>
-
 
 ### Envío IoC al Bot
 
