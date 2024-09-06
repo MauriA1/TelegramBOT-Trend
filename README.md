@@ -71,12 +71,6 @@ Debemos editar el archivo engine.py, modificando el parametro token y agregaremo
 <img src="screenshots/ios.png" width="400" >
 </p>
 
-### Impacto del IoC en Trend Micro Vision One en sección de respuestas
-
-<p align="center">
-<img src="screenshots/respuesta ioc.png" width="800" >
-</p>
-
 ### Impacto del IoC en Trend Micro Vision One en sección de indicadores de compromiso
 
 <p align="center">
@@ -95,4 +89,8 @@ Debemos editar el archivo engine.py, modificando el parametro token y agregaremo
 <img src="screenshots/recuperar.png" width="400" >
 </p>
 
+### Impacto del acciones de respuesta globales en Trend Micro Vision One
 
+<p align="center">
+<img src="screenshots/respuesta.png" width="800" >
+</p>
