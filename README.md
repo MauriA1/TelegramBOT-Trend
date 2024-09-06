@@ -42,11 +42,29 @@ Diálogo entre el BOT y el Administrador, donde se le informa las instrucciones 
 <img src="screenshots/TelegramBot2.png" width="800" >
 </p>
 
+## Prueba
+
+Puedo validar que el bot este funcionando ejecutando el comando /chiste en Telegram
+
+<p align="center">
+<img src="screenshots/chiste.png" width="800" >
+</p>
+
+
 ## Proceso :robot:
 
 Dentro de la consola Trend Micro Vision One, debemos generar un API Key la cual va a ser utilizada por el BOT.
 Debemos editar el archivo engine.py, modificando el parametro token y agregaremos el valor de la API Key que nos otorga la consola de Vision One.
+
+
 *** IMPORTANTE: ASIGNAR SOLO LOS PERMISOS NECESARIOS A LA API KEY ***
+
+### Consulta de tareas disponibles
+
+<p align="center">
+<img src="screenshots/help.png" width="400" >
+</p>
+
 
 ### Envío IoC al Bot
 
