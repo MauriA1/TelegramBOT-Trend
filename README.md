@@ -86,13 +86,13 @@ Debemos editar el archivo engine.py, modificando el parametro token y agregaremo
 ### Indicarle al Bot que aisle un Endpoint
 
 <p align="center">
-<img src="screenshots/Aislar.png" width="400" >
+<img src="screenshots/aislar.png" width="400" >
 </p>
 
 ### Indicarle al Bot que restablezca un Endpoint
 
 <p align="center">
-<img src="screenshots/Restore.png" width="400" >
+<img src="screenshots/recuperar.png" width="400" >
 </p>
 
 
