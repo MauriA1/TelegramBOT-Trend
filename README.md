@@ -21,6 +21,12 @@ Toma acciones en tu consola de Vision One por mensaje. El Bot se encargará de r
 git clone git@github.com:EDSITec/BotTelegram.git
 ```
 
+#### Modifique API KEY en el archivo engine.py
+
+<p align="center">
+<img src="screenshots/aapi.png" width="400" >
+</p>
+
 #### Construir la imagen
 
 ```bash
