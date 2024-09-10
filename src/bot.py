@@ -10,7 +10,7 @@ INPUT_TEXT = 0
 # Funciones
 def start(update, context):
     logger.info('He recibido un comando start')
-    update.message.reply_text(f'Â¡Bienvenido Bot de Vision One para ejecutar tareas de respuesta {update.message.from_user.name}!')
+    update.message.reply_text(f'¡Bienvenido Bot de Vision One para ejecutar tareas de respuesta {update.message.from_user.name}! Para conocer comandos disponibles escriba /help')
 
 def chiste(update, context):
     logger.info('Consultando API Chiste')
