@@ -15,6 +15,30 @@ Toma acciones en tu consola de Vision One por mensaje. El Bot se encargará de r
 
 ### Pasos
 
+#### Crea la VM
+
+```bash
+Se necesita un S.O Ubuntu.
+```
+
+#### Ajusta sus configuraciones
+
+```bash
+sudo apt update
+```
+```bash
+sudo apt upgrade
+```
+```bash
+sudo snap install docker
+```
+```bash
+sudo apt  install podman-docker
+```
+```bash
+sudo apt  install docker.io
+```
+
 #### Descarga el Proyecto
 
 ```bash
