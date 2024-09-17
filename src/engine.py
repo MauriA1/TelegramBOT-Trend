@@ -19,7 +19,7 @@ url_path_delete_email = '/v3.0/response/emails/delete'
 url_path_quarantine_email = '/v3.0/response/emails/quarantine'
 url_path_restore_email = '/v3.0/response/emails/restore'
 url_path_email_activities = '/v3.0/search/emailActivities'
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJjaWQiOiJkNTJhZTJjNy0wMDc5LTQzMzgtODFhNi1iZTk2OGMxYTJlMzIiLCJjcGlkIjoic3ZwIiwicHBpZCI6ImN1cyIsIml0IjoxNzI1NTYwNzU3LCJldCI6MTc1NzA5Njc1NiwiaWQiOiJmMWRlMjZmMy0zZmE5LTQ3YjQtYjM0Yy0xYTRkYTU2ZDgxMjkiLCJ0b2tlblVzZSI6ImN1c3RvbWVyIn0.S50VV5W6KUUpAZZtEsv-qrpZiDn9g1R-ZrQviVhwyBxUlsSZEqQZ6CF1opLvcD6ggAaLXqZaPUCntYcV-omfF3_JEmU7a7djhEC3DR18psquUaEp16SkJ_OSWbTIpw_x6KFUeJ2hame-Y9tb1Nqj9zTV90nQIN6snzoy7CilgWDX0k1fARYVBWhYjdHdiiwHS1eUAfvSAnuxCpTEK_uh4UBOge_uLD-onTbFIQKSK4xHS_sY5VjyldQL3AkLsuEZj99uow6VDZnugGW7NEnUVg_gRe_nKVWGpHw0vpccPB2D0PkUvlux6eqUhV4qSdbXLx_-y9mb9niTc96shxOYQzFcmoUCauGw75J0N_SYEd775ED-_g-qdY_cPxnItLAt9xshFt-J7yoVi8HDSba6uByTRM8rnygHVJf1Tus3NSkMy1kJoiTJ7P1EC2o40c0Xle8WlT9QY3avBMmvnmJS9z4N6m8w6tiSRylcf27wSu8wlKXQ3uWdtMi1Je3ZLKBBnHsbBCo5paVa_rlVnUIbaBcFl5P5NlJhx7qRey3lI4t41Wx6NV7wShzBf9HrsyEgYkI__CyYAV5xoYWK40Ufx_YwmwuqSf6mm_WamfEXmqoQqoxuIiehc8-Sq_9R7IrZ8snyHC_i_qdBnUYLSWztwyzLEAB1SuA5Aldz67U5aeo' # Sustituye con tu token real
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJjaWQiOiJkN2I3MTIxMC03YWIyLTQyMzYtOTIwMy0xMjIwMDAxM2IxZWMiLCJjcGlkIjoic3ZwIiwicHBpZCI6ImN1cyIsIml0IjoxNzI2NTk2OTIyLCJldCI6MjE5OTYzNjkyMiwiaWQiOiJiNTllMjljMS1jYWNmLTQwYjItOGFlOS05NzY1N2FmNWFmMTciLCJ0b2tlblVzZSI6ImN1c3RvbWVyIn0.uBbmzZ66e0dLx4qH9LHqKsLdIpvKQynHgR144y0oIfGPEmBGUj15Cq0W5RADaxf_dZr0TOAfbFU4PuKb_lCaMkt5SiqraPCmqGabyAAaCC2owzpqhOh1z-kHce7uW2EPX9Z2WGZrxCut0lTEjQUka979gIflErnrSBbJmt6Ka2jAX6dneWdd9ayGkrnQi7AtKnXLWNc4ltiLQ5TGcoO7clRC9phsU-wgVSqnC_MriwK3LKdMzsWjn4yxVYmXkkMh3t5tqRiiAyzDAQi1Dsf-L5Y3kAERRt7T5RXd8pu1dpq8ng-Z5627Jjfgg6v1BwETL1fvUjhne-iqCoq_pXjpCYQdYBaHyCgTAZpwwF2KGMnrksR-0kKvAXoUT9BE7Sr7NwVPZVw8sWHRW_FcV_W4FdAG64p8P30Ow1L5WFPsDr8FuN2ZENEzyl7Bs_L17vlD-Cd8Ge0QRaHMpJ6b7IEIuwypUYa3PdIIojZECm7gdwrCyvmgh14dBdZPh3eS6Nl4fjzPhw_EnQ7uXXJFgrBJpSns_P_Qlz5-72T59w-Arlks0_qysxJHL-0U8c83aiLQOtYU-2Si45jjMJPBP7TVF_lOe3PZkSQWkXeLJISXlqWotvWIMKnDldk2sSIxgs9lcWjbVNv10km46ZAeAV23ApFzK32HvhtBtL6jKXTOR74' # Sustituye con tu token real
 
 headers = {
     'Authorization': 'Bearer ' + token,
@@ -32,12 +32,12 @@ def get_chiste():
     return data["value"]
 
 def get_ips(content):
-    # FunciÃƒÆ’Ã‚Â³n simplificada para extraer IPs
+    # Funcion simplificada para extraer IPs
     ip_pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
     return re.findall(ip_pattern, content)
 
 def get_hashes(content):
-    # FunciÃƒÆ’Ã‚Â³n simplificada para extraer hashes SHA-256
+    # Funcion simplificada para extraer hashes SHA-256
     hash_pattern = r'\b[A-Fa-f0-9]{64}\b'
     return re.findall(hash_pattern, content)
 
@@ -52,8 +52,8 @@ def upload_iocs(hashes):
         return response.text
 
 def get_endpoints(content):
-    # FunciÃƒÆ’Ã‚Â³n simplificada para extraer nombres de endpoints (simulando la funcionalidad)
-    # Ajusta esta funciÃƒÆ’Ã‚Â³n segÃƒÆ’Ã‚Âºn tus necesidades
+    # Funcion simplificada para extraer nombres de endpoints (simulando la funcionalidad)
+    # Ajusta esta funcion segun tus necesidades
     return content.splitlines()
 
 def isolate_endpoints(endpoints):
@@ -112,10 +112,10 @@ def start_malware_scan(lista_equipos):
         return f'Error: {r.status_code} - {r.text}'
 
 def procesar_sha256(hashes: list) -> str:
-    # Filtrar hashes vÃƒÂ¡lidos (de 64 caracteres)
+    # Filtrar hashes validos (de 64 caracteres)
     valid_hashes = [h for h in hashes if len(h) == 64]
     
-    # Si no hay hashes vÃƒÂ¡lidos, devuelve un mensaje de error
+    # Si no hay hashes vaidos, devuelve un mensaje de error
     if not valid_hashes:
         return json.dumps({"error": "No se proporcionaron hashes SHA256 validos."}, indent=2)
 
@@ -131,12 +131,12 @@ def procesar_sha256(hashes: list) -> str:
     # Enviar la solicitud POST a la API
     try:
         r = requests.post(url_base + url_path, headers=headers, json=body)
-        r.raise_for_status()  # Lanza un error si la respuesta tiene un cÃƒÂ³digo de estado 4xx/5xx
+        r.raise_for_status()  # Lanza un error si la respuesta tiene un codigo de estado 4xx/5xx
 
         if r.status_code == 207:
             data = r.json()
-            # Suponiendo que la respuesta de la API contiene informaciÃƒÂ³n sobre cada hash
-            # y que cada hash tiene un campo 'status' para verificar el ÃƒÂ©xito.
+            # Suponiendo que la respuesta de la API contiene informacion sobre cada hash
+            # y que cada hash tiene un campo 'status' para verificar el exito.
             successful_count = sum(1 for item in data if item.get('status') == 202)
             
             response_json = {
@@ -157,10 +157,10 @@ def procesar_sha256(hashes: list) -> str:
         }, indent=2)
         
 def procesar_sha1(hashes: list) -> str:
-    # Filtrar hashes vÃƒÂ¡lidos (de 64 caracteres)
+    # Filtrar hashes validos (de 64 caracteres)
     valid_hashes = [h for h in hashes if len(h) == 40]
     
-    # Si no hay hashes vÃƒÂ¡lidos, devuelve un mensaje de error
+    # Si no hay hashes validos, devuelve un mensaje de error
     if not valid_hashes:
         return json.dumps({"error": "No se proporcionaron hashes SHA1 validos."}, indent=2)
 
@@ -176,12 +176,12 @@ def procesar_sha1(hashes: list) -> str:
     # Enviar la solicitud POST a la API
     try:
         r = requests.post(url_base + url_path, headers=headers, json=body)
-        r.raise_for_status()  # Lanza un error si la respuesta tiene un cÃƒÂ³digo de estado 4xx/5xx
+        r.raise_for_status()  # Lanza un error si la respuesta tiene un codigo de estado 4xx/5xx
 
         if r.status_code == 207:
             data = r.json()
-            # Suponiendo que la respuesta de la API contiene informaciÃƒÂ³n sobre cada hash
-            # y que cada hash tiene un campo 'status' para verificar el ÃƒÂ©xito.
+            # Suponiendo que la respuesta de la API contiene informacion sobre cada hash
+            # y que cada hash tiene un campo 'status' para verificar el exito.
             successful_count = sum(1 for item in data if item.get('status') == 202)
             
             response_json = {
@@ -214,12 +214,12 @@ def procesar_ip(ips: list) -> str:
     # Enviar la solicitud POST a la API
     try:
         r = requests.post(url_base + url_path, headers=headers, json=body)
-        r.raise_for_status()  # Lanza un error si la respuesta tiene un cÃƒÂ³digo de estado 4xx/5xx
+        r.raise_for_status()  # Lanza un error si la respuesta tiene un codigo de estado 4xx/5xx
 
         if r.status_code == 207:
             data = r.json()
-            # Suponiendo que la respuesta de la API contiene informaciÃƒÂ³n sobre cada hash
-            # y que cada hash tiene un campo 'status' para verificar el ÃƒÂ©xito.
+            # Suponiendo que la respuesta de la API contiene informacion sobre cada hash
+            # y que cada hash tiene un campo 'status' para verificar el exito.
             successful_count = sum(1 for item in data if item.get('status') == 202)
             
             response_json = {
@@ -252,12 +252,12 @@ def procesar_url(urls: list) -> str:
     # Enviar la solicitud POST a la API
     try:
         r = requests.post(url_base + url_path, headers=headers, json=body)
-        r.raise_for_status()  # Lanza un error si la respuesta tiene un cÃƒÂ³digo de estado 4xx/5xx
+        r.raise_for_status()  # Lanza un error si la respuesta tiene un codigo de estado 4xx/5xx
 
         if r.status_code == 207:
             data = r.json()
-            # Suponiendo que la respuesta de la API contiene informaciÃƒÂ³n sobre cada hash
-            # y que cada hash tiene un campo 'status' para verificar el ÃƒÂ©xito.
+            # Suponiendo que la respuesta de la API contiene informacion sobre cada hash
+            # y que cada hash tiene un campo 'status' para verificar el exito.
             successful_count = sum(1 for item in data if item.get('status') == 202)
             
             response_json = {
@@ -290,12 +290,12 @@ def procesar_domain(domains: list) -> str:
     # Enviar la solicitud POST a la API
     try:
         r = requests.post(url_base + url_path, headers=headers, json=body)
-        r.raise_for_status()  # Lanza un error si la respuesta tiene un cÃƒÂ³digo de estado 4xx/5xx
+        r.raise_for_status()  # Lanza un error si la respuesta tiene un codigo de estado 4xx/5xx
 
         if r.status_code == 207:
             data = r.json()
-            # Suponiendo que la respuesta de la API contiene informaciÃƒÂ³n sobre cada hash
-            # y que cada hash tiene un campo 'status' para verificar el ÃƒÂ©xito.
+            # Suponiendo que la respuesta de la API contiene informacion sobre cada hash
+            # y que cada hash tiene un campo 'status' para verificar el exito.
             successful_count = sum(1 for item in data if item.get('status') == 202)
             
             response_json = {
@@ -328,12 +328,12 @@ def procesar_sender(senders: list) -> str:
     # Enviar la solicitud POST a la API
     try:
         r = requests.post(url_base + url_path, headers=headers, json=body)
-        r.raise_for_status()  # Lanza un error si la respuesta tiene un cÃƒÂ³digo de estado 4xx/5xx
+        r.raise_for_status()  # Lanza un error si la respuesta tiene un codigo de estado 4xx/5xx
 
         if r.status_code == 207:
             data = r.json()
-            # Suponiendo que la respuesta de la API contiene informaciÃƒÂ³n sobre cada hash
-            # y que cada hash tiene un campo 'status' para verificar el ÃƒÂ©xito.
+            # Suponiendo que la respuesta de la API contiene informacion sobre cada hash
+            # y que cada hash tiene un campo 'status' para verificar el exito.
             successful_count = sum(1 for item in data if item.get('status') == 202)
             
             response_json = {
@@ -355,17 +355,17 @@ def procesar_sender(senders: list) -> str:
 
 
 def eliminar_suspicious_objects_sha256(lista_sha256):
-    # Validar que la lista no estÃƒÆ’Ã‚Â© vacÃƒÆ’Ã‚Â­a
+    # Validar que la lista no esta vacia
     if not lista_sha256:
         return "No se proporcionaron hashes SHA256 para eliminar."
 
     # Construir el cuerpo de la solicitud
     body = []
     for sha256 in lista_sha256:
-        # AÃƒÆ’Ã‚Â±adir hashes SHA256 sospechosos al cuerpo
+        # anadir hashes SHA256 sospechosos al cuerpo
         body.append({
             'description': f'Eliminando {sha256}',
-            'fileSha256': sha256  # EspecÃƒÆ’Ã‚Â­fico para hashes SHA256 sospechosos
+            'fileSha256': sha256  # Especifico para hashes SHA256 sospechosos
         })
 
     # Realizar la solicitud HTTP POST con manejo de excepciones
@@ -384,17 +384,17 @@ def eliminar_suspicious_objects_sha256(lista_sha256):
         return f'Error al hacer la solicitud: {e}'
 
 def eliminar_suspicious_objects_sha1(lista_sha1):
-    # Validar que la lista no estÃƒÆ’Ã‚Â© vacÃƒÆ’Ã‚Â­a
+    # Validar que la lista no esta vacia
     if not lista_sha1:
         return "No se proporcionaron hashes SHA1 para eliminar."
 
     # Construir el cuerpo de la solicitud
     body = []
     for sha1 in lista_sha1:
-        # AÃƒÆ’Ã‚Â±adir hashes SHA1 sospechosos al cuerpo
+        # anadir hashes SHA1 sospechosos al cuerpo
         body.append({
             'description': f'Eliminando {sha1}',
-            'fileSha1': sha1  # EspecÃƒÆ’Ã‚Â­fico para hashes SHA1 sospechosos
+            'fileSha1': sha1  # Especi­fico para hashes SHA1 sospechosos
         })
 
     # Realizar la solicitud HTTP POST con manejo de excepciones
@@ -413,17 +413,17 @@ def eliminar_suspicious_objects_sha1(lista_sha1):
         return f'Error al hacer la solicitud: {e}'
 
 def eliminar_suspicious_objects_ip(lista_ips):
-    # Validar que la lista no estÃƒÆ’Ã‚Â© vacÃƒÆ’Ã‚Â­a
+    # Validar que la lista no esta vacia
     if not lista_ips:
         return "No se proporcionaron IPs para eliminar."
 
     # Construir el cuerpo de la solicitud
     body = []
     for ip in lista_ips:
-        # AÃƒÆ’Ã‚Â±adir IPs sospechosas al cuerpo
+        # anadir IPs sospechosas al cuerpo
         body.append({
             'description': f'Eliminando {ip}',
-            'ip': ip  # EspecÃƒÆ’Ã‚Â­fico para IPs sospechosas
+            'ip': ip  # Especifico para IPs sospechosas
         })
 
     # Realizar la solicitud HTTP POST con manejo de excepciones
@@ -442,17 +442,17 @@ def eliminar_suspicious_objects_ip(lista_ips):
         return f'Error al hacer la solicitud: {e}'
 
 def eliminar_suspicious_objects_url(lista_urls):
-    # Validar que la lista no estÃƒÆ’Ã‚Â© vacÃƒÆ’Ã‚Â­a
+    # Validar que la lista no esta vacia
     if not lista_urls:
         return "No se proporcionaron URLs para eliminar."
 
     # Construir el cuerpo de la solicitud
     body = []
     for url in lista_urls:
-        # AÃƒÆ’Ã‚Â±adir objetos sospechosos al cuerpo
+        # anadir objetos sospechosos al cuerpo
         body.append({
             'description': f'Eliminando {url}',
-            'url': url  # EspecÃƒÆ’Ã‚Â­fico para URLs sospechosas
+            'url': url  # Especifico para URLs sospechosas
         })
 
     # Realizar la solicitud HTTP POST con manejo de excepciones
@@ -471,17 +471,17 @@ def eliminar_suspicious_objects_url(lista_urls):
         return f'Error al hacer la solicitud: {e}'
 
 def eliminar_suspicious_objects_domain(lista_dominios):
-    # Validar que la lista no estÃƒÆ’Ã‚Â© vacÃƒÆ’Ã‚Â­a
+    # Validar que la lista no este vacia
     if not lista_dominios:
         return "No se proporcionaron dominios para eliminar."
 
     # Construir el cuerpo de la solicitud
     body = []
     for dominio in lista_dominios:
-        # AÃƒÆ’Ã‚Â±adir dominios sospechosos al cuerpo
+        # anadir dominios sospechosos al cuerpo
         body.append({
             'description': f'Eliminando {dominio}',
-            'domain': dominio  # EspecÃƒÆ’Ã‚Â­fico para dominios sospechosos
+            'domain': dominio  # Especifico para dominios sospechosos
         })
 
     # Realizar la solicitud HTTP POST con manejo de excepciones
@@ -500,17 +500,17 @@ def eliminar_suspicious_objects_domain(lista_dominios):
         return f'Error al hacer la solicitud: {e}'
 
 def eliminar_suspicious_objects_sender(lista_objetos):
-    # Validar que la lista no estÃƒÆ’Ã‚Â© vacÃƒÆ’Ã‚Â­a
+    # Validar que la lista no este vacia
     if not lista_objetos:
         return "No se proporcionaron objetos para eliminar."
 
     # Construir el cuerpo de la solicitud
     body = []
     for objeto in lista_objetos:
-        # AÃƒÆ’Ã‚Â±adir objetos sospechosos al cuerpo
+        # Anadir objetos sospechosos al cuerpo
         body.append({
             'description': f'Eliminando {objeto}',
-            'senderMailAddress': objeto  # EspecÃƒÆ’Ã‚Â­fico para remitentes sospechosos
+            'senderMailAddress': objeto  # Especifico para remitentes sospechosos
         })
 
     # Realizar la solicitud HTTP POST con manejo de excepciones
@@ -558,7 +558,7 @@ def ejecutar_script_customizado(nombre_script, lista_endpoints, parametros=None)
             'fileName': nombre_script  # Nombre del script a ejecutar
         }
 
-        # Agregar los parÃƒÆ’Ã‚Â¡metros si estÃƒÆ’Ã‚Â¡n presentes
+        # Agregar los parametros si estan presentes
         if parametros:
             script_info['parameter'] = ' '.join(parametros)
 
@@ -583,7 +583,7 @@ def ejecutar_script_customizado(nombre_script, lista_endpoints, parametros=None)
 #Funcion para deshabilitar cuentas
 
 def deshabilitar_cuentas(lista_cuentas):
-    # Validar que la lista no estÃƒÆ’Ã‚Â© vacÃƒÆ’Ã‚Â­a
+    # Validar que la lista no este vaci­a
     if not lista_cuentas:
         return "No se proporcionaron cuentas para deshabilitar."
     # Construir el cuerpo de la solicitud
@@ -610,7 +610,7 @@ def deshabilitar_cuentas(lista_cuentas):
 #Funcion para habilitar cuentas deshabilitadas
 
 def habilitar_cuentas(lista_cuentas):
-    # Validar que la lista no estÃƒÆ’Ã‚Â© vacÃƒÆ’Ã‚Â­a
+    # Validar que la lista no este vacia
     if not lista_cuentas:
         return "No se proporcionaron cuentas para habilitar."
     # Construir el cuerpo de la solicitud
@@ -637,7 +637,7 @@ def habilitar_cuentas(lista_cuentas):
 #Funcion para forzar deslogueo de cuentas
 
 def desloguear_cuentas(lista_cuentas):
-    # Validar que la lista no estÃƒÆ’Ã‚Â© vacÃƒÆ’Ã‚Â­a
+    # Validar que la lista no este vaci­a
     if not lista_cuentas:
         return "No se proporcionaron cuentas para desloguear."
     # Construir el cuerpo de la solicitud
@@ -664,15 +664,15 @@ def desloguear_cuentas(lista_cuentas):
 #Funcion para resetear el password de la cuenta
 
 def resetear_password(lista_cuentas):
-    # Validar que la lista no estÃƒÆ’Ã‚Â© vacÃƒÆ’Ã‚Â­a
+    # Validar que la lista no este vaci­a
     if not lista_cuentas:
-        return "No se proporcionaron cuentas para restablecer las contraseÃƒÆ’Ã‚Â±as."
+        return "No se proporcionaron cuentas para restablecer las contrasenas."
     # Construir el cuerpo de la solicitud
     body = []
     for cuenta in lista_cuentas:
         body.append({
             'accountName': cuenta,
-            'description': f'Reseteando contraseÃƒÆ’Ã‚Â±a de la cuenta {cuenta}'
+            'description': f'Reseteando contrasena de la cuenta {cuenta}'
         })
     # Realizar la solicitud HTTP POST con manejo de excepciones
     try:
@@ -702,13 +702,13 @@ def eliminar_mensajes_por_uuid(uuids: list) -> str:
         for i, uuid_value in enumerate(uuids)
     ]
 
-    # EnvÃƒÆ’Ã‚Â­a la solicitud POST a la API
+    # Envi­a la solicitud POST a la API
     try:
         r = requests.post(url_base + url_path_delete_email, headers=headers, json=body)
         if r.status_code == 200:
             return "Mensajes eliminados correctamente."
         else:
-            return f"Error al eliminar mensajes. CÃƒÆ’Ã‚Â³digo de estado: {r.status_code}"
+            return f"Error al eliminar mensajes. Codigo de estado: {r.status_code}"
     except Exception as e:
         return f"Error al conectar con la API: {e}"
 
@@ -722,13 +722,13 @@ def mandar_mensajes_a_cuarentena(uuids: list) -> str:
         for i, uuid_value in enumerate(uuids)
     ]
 
-    # EnvÃƒÆ’Ã‚Â­a la solicitud POST a la API
+    # Envi­a la solicitud POST a la API
     try:
         r = requests.post(url_base + url_path_quarantine_email, headers=headers, json=body)
         if r.status_code == 200:
             return "Mensajes enviados a cuarentena correctamente."
         else:
-            return f"Error al enviar mensajes a cuarentena. CÃƒÆ’Ã‚Â³digo de estado: {r.status_code}"
+            return f"Error al enviar mensajes a cuarentena. Codigo de estado: {r.status_code}"
     except Exception as e:
         return f"Error al conectar con la API: {e}"
 
@@ -742,19 +742,19 @@ def restaurar_mensajes(uuids: list) -> str:
         for i, uuid_value in enumerate(uuids)
     ]
 
-    # EnvÃƒÆ’Ã‚Â­a la solicitud POST a la API
+    # Envia la solicitud POST a la API
     try:
         r = requests.post(url_base + url_path_restore_email, headers=headers, json=body)
         if r.status_code == 200:
             return "Mensajes restaurados correctamente."
         else:
-            return f"Error al restaurar mensajes. CÃƒÆ’Ã‚Â³digo de estado: {r.status_code}"
+            return f"Error al restaurar mensajes. Codigo de estado: {r.status_code}"
     except Exception as e:
         return f"Error al conectar con la API: {e}"
 
 def buscar_correos_por_asunto(asunto: str) -> dict:
     headersCorreo = {
-        'Authorization': 'Bearer ' + token, # AsegÃƒÆ’Ã‚Âºrate de reemplazar 'YOUR_TOKEN' por el token correcto
+        'Authorization': 'Bearer ' + token, # Asegurate de reemplazar 'YOUR_TOKEN' por el token correcto
         'Content-Type': 'application/json;charset=utf-8',
         'TMV1-Query': f'mailMsgSubject:{asunto}'  # Asunto ya viene con comillas
     }
@@ -766,7 +766,7 @@ def buscar_correos_por_asunto(asunto: str) -> dict:
         if r.status_code == 200:
             return r.json()
         else:
-            return {'error': f"CÃƒÆ’Ã‚Â³digo de estado: {r.status_code}"}
+            return {'error': f"Codigo de estado: {r.status_code}"}
     except requests.exceptions.RequestException as e:
         return {'error': str(e)}
 
