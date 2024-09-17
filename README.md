@@ -39,6 +39,24 @@ sudo apt  install podman-docker
 sudo apt  install docker.io
 ```
 
+#### Añade el proyecto como repositorio propio en GitHub
+
+```bash
+Sobre el icono "+" y haciendo click sobre "Import Repository"
+```
+
+#### Crea la llave de acceso
+
+```bash
+ssh-keygen -t rsa -b 4096 -C <"correo electronico">
+```
+
+#### Añade la llave de acceso a tu cuenta de GitHub
+
+```bash
+Settings --> SSH and GPG Keys
+```
+
 #### Descarga el Proyecto
 
 ```bash
