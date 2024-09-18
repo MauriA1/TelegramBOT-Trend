@@ -19,7 +19,7 @@ url_path_delete_email = '/v3.0/response/emails/delete'
 url_path_quarantine_email = '/v3.0/response/emails/quarantine'
 url_path_restore_email = '/v3.0/response/emails/restore'
 url_path_email_activities = '/v3.0/search/emailActivities'
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJjaWQiOiJkN2I3MTIxMC03YWIyLTQyMzYtOTIwMy0xMjIwMDAxM2IxZWMiLCJjcGlkIjoic3ZwIiwicHBpZCI6ImN1cyIsIml0IjoxNzI2NTk2OTIyLCJldCI6MjE5OTYzNjkyMiwiaWQiOiJiNTllMjljMS1jYWNmLTQwYjItOGFlOS05NzY1N2FmNWFmMTciLCJ0b2tlblVzZSI6ImN1c3RvbWVyIn0.uBbmzZ66e0dLx4qH9LHqKsLdIpvKQynHgR144y0oIfGPEmBGUj15Cq0W5RADaxf_dZr0TOAfbFU4PuKb_lCaMkt5SiqraPCmqGabyAAaCC2owzpqhOh1z-kHce7uW2EPX9Z2WGZrxCut0lTEjQUka979gIflErnrSBbJmt6Ka2jAX6dneWdd9ayGkrnQi7AtKnXLWNc4ltiLQ5TGcoO7clRC9phsU-wgVSqnC_MriwK3LKdMzsWjn4yxVYmXkkMh3t5tqRiiAyzDAQi1Dsf-L5Y3kAERRt7T5RXd8pu1dpq8ng-Z5627Jjfgg6v1BwETL1fvUjhne-iqCoq_pXjpCYQdYBaHyCgTAZpwwF2KGMnrksR-0kKvAXoUT9BE7Sr7NwVPZVw8sWHRW_FcV_W4FdAG64p8P30Ow1L5WFPsDr8FuN2ZENEzyl7Bs_L17vlD-Cd8Ge0QRaHMpJ6b7IEIuwypUYa3PdIIojZECm7gdwrCyvmgh14dBdZPh3eS6Nl4fjzPhw_EnQ7uXXJFgrBJpSns_P_Qlz5-72T59w-Arlks0_qysxJHL-0U8c83aiLQOtYU-2Si45jjMJPBP7TVF_lOe3PZkSQWkXeLJISXlqWotvWIMKnDldk2sSIxgs9lcWjbVNv10km46ZAeAV23ApFzK32HvhtBtL6jKXTOR74' # Sustituye con tu token real
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJjaWQiOiJkNTJhZTJjNy0wMDc5LTQzMzgtODFhNi1iZTk2OGMxYTJlMzIiLCJjcGlkIjoic3ZwIiwicHBpZCI6ImN1cyIsIml0IjoxNzI2NjY5OTQ3LCJldCI6MTc1ODIwNTk0NywiaWQiOiI3N2E4YjEwZi0xY2NjLTQ3MTUtYTZiYy02YzJmMTExMDEwYWIiLCJ0b2tlblVzZSI6ImN1c3RvbWVyIn0.p-WzsbW0H4_z2Em1Zlcozmgh-u5PJyqtVrXnHSbVHusuXp4GXoLNAmE06hKh9kY6zfmmC7jsdqqf_vyETvSDus1jvbZnLwjgzVPCDTU9svoaO59lpUHwNJOKHf4AwciEE4alhLJywlmvda4WgljeSWjyNQsp5fYWQ8ai7s8-SyP0BGod0Dy3g8dSBsHIHeYhxiUIB1Dz6HGYyfWvTacnbW-M6NJAR8sxleqYa1HCKP0jc_dKN2vsth0ALjd6ZUGehkGg1NnYFQNuxSFG_MoPrdrZUA2o7N871ZtVQBWG78tUzT94cqVxQ8RmUKZ1NiwHQPlv8TBEWtnoFZoqTQLUvwlGvbUjsdWFxqeb9AlLVS-xSP7K26PUczDfu-tHS-P0APTL8UEM1Txkz_YTtX_xX0MgG9PgN6VZdkFQvRVy98cMgzMPnsMivc1ECcMnhBzrheoEtgezTxIgkx7ovmafKjElRl_LpDW9582IoGzW_Z_iSabfpyD_GkVnT7IT9jC5h6P2zT1w4-Lqu8tzdGPd-virP8TNuXwt5-9SoEYMfCKfCWlpibCS3tE1nrKL57MNRtCykv7UqPAyuMDj-5pDZ2V4H6rKwoFspCr5YU_Ywez7Wd_Tf_kWobYbatrU_kanI_9ETKZduGmuiywkm-k3rdGe8a1b8DzM98wy2Rd4bxg' # Sustituye con tu token real
 
 headers = {
     'Authorization': 'Bearer ' + token,
@@ -205,7 +205,7 @@ def procesar_ip(ips: list) -> str:
     # Construye el cuerpo de la solicitud
     body = [
         {
-            'description': f'IP {i+1}',
+            'description': f'Bot de Telegram',
             'ip': ip_value
         }
         for i, ip_value in enumerate(ips)
