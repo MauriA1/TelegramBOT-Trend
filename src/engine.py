@@ -19,7 +19,7 @@ url_path_delete_email = '/v3.0/response/emails/delete'
 url_path_quarantine_email = '/v3.0/response/emails/quarantine'
 url_path_restore_email = '/v3.0/response/emails/restore'
 url_path_email_activities = '/v3.0/search/emailActivities'
-token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJjaWQiOiJkNTJhZTJjNy0wMDc5LTQzMzgtODFhNi1iZTk2OGMxYTJlMzIiLCJjcGlkIjoic3ZwIiwicHBpZCI6ImN1cyIsIml0IjoxNzI2NjY5OTQ3LCJldCI6MTc1ODIwNTk0NywiaWQiOiI3N2E4YjEwZi0xY2NjLTQ3MTUtYTZiYy02YzJmMTExMDEwYWIiLCJ0b2tlblVzZSI6ImN1c3RvbWVyIn0.p-WzsbW0H4_z2Em1Zlcozmgh-u5PJyqtVrXnHSbVHusuXp4GXoLNAmE06hKh9kY6zfmmC7jsdqqf_vyETvSDus1jvbZnLwjgzVPCDTU9svoaO59lpUHwNJOKHf4AwciEE4alhLJywlmvda4WgljeSWjyNQsp5fYWQ8ai7s8-SyP0BGod0Dy3g8dSBsHIHeYhxiUIB1Dz6HGYyfWvTacnbW-M6NJAR8sxleqYa1HCKP0jc_dKN2vsth0ALjd6ZUGehkGg1NnYFQNuxSFG_MoPrdrZUA2o7N871ZtVQBWG78tUzT94cqVxQ8RmUKZ1NiwHQPlv8TBEWtnoFZoqTQLUvwlGvbUjsdWFxqeb9AlLVS-xSP7K26PUczDfu-tHS-P0APTL8UEM1Txkz_YTtX_xX0MgG9PgN6VZdkFQvRVy98cMgzMPnsMivc1ECcMnhBzrheoEtgezTxIgkx7ovmafKjElRl_LpDW9582IoGzW_Z_iSabfpyD_GkVnT7IT9jC5h6P2zT1w4-Lqu8tzdGPd-virP8TNuXwt5-9SoEYMfCKfCWlpibCS3tE1nrKL57MNRtCykv7UqPAyuMDj-5pDZ2V4H6rKwoFspCr5YU_Ywez7Wd_Tf_kWobYbatrU_kanI_9ETKZduGmuiywkm-k3rdGe8a1b8DzM98wy2Rd4bxg' # Sustituye con tu token real
+token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJjaWQiOiJkN2I3MTIxMC03YWIyLTQyMzYtOTIwMy0xMjIwMDAxM2IxZWMiLCJjcGlkIjoic3ZwIiwicHBpZCI6ImN1cyIsIml0IjoxNzI2Njk5ODUyLCJldCI6MTc1ODIzNTg1MiwiaWQiOiI0N2M4ODVlZi1iYzc5LTQzY2ItODg2MS1hYzM1MzBiYTczYjgiLCJ0b2tlblVzZSI6ImN1c3RvbWVyIn0.om8jqWXxYi83g7xSKQAn0pEVYU5deT98um85DnjDv74Vv23iy1GVT-JwKlXWAB_clV72I7-E4FRplyA3PHLDkpkeEmjI7s5rieUi52TKAk2kRFSAeAP6TQVPZcaoiLSyBYrSjC7UP5HxMkWmzJrBvNgxBV5UQSlcGWUGl3LiIS70gN0TawLSqwXVcDjNqpHYcx9xHw-JnmwxJQaOi33IG3bI2TKkCPb_ini1L9LSiJjhEALOuDPFG1cRTgr8lf854R7y5_ZIh7cL2Q4cd0eVxQJl75SvmalgU08n9J9pGnxjH5JAmqQHW5MP8v76MuEHTOPrxfy31AcqyAQSTrLiJWUKPU4U_ZplD0RIQzvLdQK391HvIKOkiKG4K5Zqmq_5mQ2qQcO0IPwUhAAanmeGCKotNkBh60qWERExRRZBt2Ck5QzgJzarNgm6YAWhHxThy2M8kBvEzvrWBbwflfo4UJYB5aJMEfIha1sm7molxfLGkvBkcYvQgfEW9-Qin7rg3Tate-F3GC87S-AAdHwOd7Q2RAan0nad3Y-m4Qzj7fG2ITi7S6FZ9Hw1mBmXkyw8ydYH4bZA_wx-niJbLU9AkGF8fm9To4ASosqmX7OMeJQrPfB2seOdhmdFbGJWgunrIFlOE_s9yt5z1_xSf3uA4KOdZ2LlhfjMhdda3PsCHJc' # Sustituye con tu token real
 
 headers = {
     'Authorization': 'Bearer ' + token,
@@ -122,7 +122,7 @@ def procesar_sha256(hashes: list) -> str:
     # Construye el cuerpo de la solicitud
     body = [
         {
-            'description': f'SHA256 hash {i+1}',
+            'description': f'SHA256 - Bot Telegram',
             'fileSha256': hash_value
         }
         for i, hash_value in enumerate(valid_hashes)
@@ -167,7 +167,7 @@ def procesar_sha1(hashes: list) -> str:
     # Construye el cuerpo de la solicitud
     body = [
         {
-            'description': f'SHA hash {i+1}',
+            'description': f'SHA - Bot Telegram',
             'fileSha1': hash_value
         }
         for i, hash_value in enumerate(valid_hashes)
@@ -205,7 +205,7 @@ def procesar_ip(ips: list) -> str:
     # Construye el cuerpo de la solicitud
     body = [
         {
-            'description': f'Bot de Telegram',
+            'description': f'IP - Bot Telegram',
             'ip': ip_value
         }
         for i, ip_value in enumerate(ips)
@@ -243,7 +243,7 @@ def procesar_url(urls: list) -> str:
     # Construye el cuerpo de la solicitud
     body = [
         {
-            'description': f'URL {i+1}',
+            'description': f'URL - Bot Telegram',
             'url': url_value
         }
         for i, url_value in enumerate(urls)
@@ -281,7 +281,7 @@ def procesar_domain(domains: list) -> str:
     # Construye el cuerpo de la solicitud
     body = [
         {
-            'description': f'Dominio {i+1}',
+            'description': f'Dominio - Bot Telegram',
             'domain': domain_value
         }
         for i, domain_value in enumerate(domains)
@@ -319,7 +319,7 @@ def procesar_sender(senders: list) -> str:
     # Construye el cuerpo de la solicitud
     body = [
         {
-            'description': f'Remitente {i+1}',
+            'description': f'Remitente - Bot Telegram',
             'senderMailAddress': sender_value
         }
         for i, sender_value in enumerate(senders)
