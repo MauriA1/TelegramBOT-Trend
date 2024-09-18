@@ -60,7 +60,7 @@ Settings --> SSH and GPG Keys
 #### Descarga el Proyecto
 
 ```bash
-git clone git@github.com:EDSITec/BotTelegram.git
+git clone git@github.com:MauriA1/TelegramBOT-AGD.git
 ```
 
 #### Modifique API KEY en el archivo engine.py
@@ -73,6 +73,12 @@ git clone git@github.com:EDSITec/BotTelegram.git
 
 ```bash
 docker build -t bot .
+```
+
+#### Creación del BOT de Telegram a través de BotFather
+
+```bash
+Buscar BotFather en telegram y seguir los pasos para la creación del BOT y obtener el "Token"
 ```
 
 #### Ejecutar el contenedor
