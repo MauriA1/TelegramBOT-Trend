@@ -60,7 +60,7 @@ Settings --> SSH and GPG Keys
 #### Descarga el Proyecto
 
 ```bash
-git clone git@github.com:MauriA1/TelegramBOT-AGD.git
+git clone ssh://git@ssh.github.com:443/MauriA1/TelegramBOT-AGD.git
 ```
 
 #### Modifique API KEY en el archivo engine.py
