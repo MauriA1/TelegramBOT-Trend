@@ -69,6 +69,13 @@ git clone ssh://git@ssh.github.com:443/MauriA1/TelegramBOT-AGD.git
 <img src="screenshots/aapi.png" width="400" >
 </p>
 
+
+#### Agregue ID de telegram permitidos para utilizar el bot en el archivo bot.py
+
+<p align="center">
+<img src="screenshots/aapi.png" width="400" >
+</p>
+
 #### Construir la imagen
 
 ```bash
