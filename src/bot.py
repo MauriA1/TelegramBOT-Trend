@@ -7,11 +7,23 @@ import logging, os
 TEXTO_ENDPOINTS = 0
 INPUT_TEXT = 0
 
-# Funciones
-def start(update, context):
-    logger.info('He recibido un comando start')
-    update.message.reply_text(f'¡Bienvenido Bot de Vision One para ejecutar tareas de respuesta {update.message.from_user.name}! Para conocer comandos disponibles escriba /help')
+# Lista de user_ids autorizados
+authorized_users = [5688659524]  # Reemplaza con los user_ids autorizados
 
+# Funcion de start con control de acceso basado en user_id
+def start(update, context):
+    user_id = update.message.from_user.id  # Obtiene el user_id del usuario
+    full_name = update.message.from_user.full_name  # Nombre completo del usuario
+
+    # Verifica si el user_id esta en la lista de autorizados
+    if user_id in authorized_users:
+        logger.info(f'He recibido un comando start de {full_name} (user_id: {user_id})')
+        update.message.reply_text(f'Bienvenido al Bot de Vision One, {full_name}! Para conocer los comandos disponibles, escribe /help')
+    else:
+        logger.warning(f'Intento de acceso no autorizado de {full_name} (user_id: {user_id})')
+        update.message.reply_text('Acceso denegado. No tienes permiso para utilizar este bot.')
+
+#Funcion        
 def chiste(update, context):
     logger.info('Consultando API Chiste')
     update.message.reply_text(get_chiste())
